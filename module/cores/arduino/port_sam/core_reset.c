@@ -30,9 +30,9 @@ static void banzai(void)
   __disable_irq();
 
   // Set bootflag to run SAM-BA bootloader at restart
-  while ((EFC0->EEFC_FSR & EEFC_FSR_FRDY) == 0);
-  EFC0->EEFC_FCR = EEFC_FCR_FCMD_CGPB | EEFC_FCR_FARG(1) | EEFC_FCR_FKEY_PASSWD;
-  while ((EFC0->EEFC_FSR & EEFC_FSR_FRDY) == 0);
+  while ((EFC->EEFC_FSR & EEFC_FSR_FRDY) == 0);
+  EFC->EEFC_FCR = EEFC_FCR_FCMD_CGPB | EEFC_FCR_FARG(1) | EEFC_FCR_FKEY_PASSWD;
+  while ((EFC->EEFC_FSR & EEFC_FSR_FRDY) == 0);
 
   // From here flash memory is no more available.
 

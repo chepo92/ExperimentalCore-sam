@@ -20,13 +20,14 @@
 #ifndef _ARDUINO_CORE_VARIANT_H_
 #define _ARDUINO_CORE_VARIANT_H_
 
-#include <stdint.h>
-#include "sam.h"
-#include "core_constants.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+#include <stdint.h>
+#include "sam.h"
+#include "core_sam.h"
+#include "core_constants.h"
 
 /* The 2 following symbols must be present into variant_startup.c */
 extern uint32_t SystemCoreClock;

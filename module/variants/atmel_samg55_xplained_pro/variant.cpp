@@ -17,6 +17,7 @@
 */
 
 #include "variant.h"
+#include "core_variant.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,11 +52,11 @@ const PinDescription g_aPinMap[]=
   { PORTA, PIO_PA27B_RXD7, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 7 RXD7
   { PORTA, PIO_PA28B_TXD7, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 7 TXD7
 // Serial 1
-  { PORTA, PIO_PA9A_RXD0, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 0 RXD0
-  { PORTA, PIO_PA10A_TXD0, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 0 TXD0
+  { PORTA, PIO_PA9A_USART0_RXD0, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 0 RXD0
+  { PORTA, PIO_PA10A_USART0_TXD0, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 0 TXD0
 // Serial 2
-  { PORTB, PIO_PB1B_RXD6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 6 RXD6
-  { PORTB, PIO_PB0B_TXD6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 6 TXD6
+  { PORTB, PIO_PB1B_USART6_RXD6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 6 RXD6
+  { PORTB, PIO_PB0B_USART6_TXD6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 6 TXD6
 
 /* +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  * |            | LEDs & button    |        |                 |
@@ -89,14 +90,14 @@ const PinDescription g_aPinMap[]=
 // EXT1
   { PORTA, PIO_PA26, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_5
   { PORTA, PIO_PA25, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_6
-  { PORTA, PIO_PA0B_TIOA0, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_7
-  { PORTA, PIO_PA23B_TIOA1, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_8
+  { PORTA, PIO_PA0B_TC0_TIOA0, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_7
+  { PORTA, PIO_PA23B_TC0_TIOA1, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_8
   { PORTA, PIO_PA24, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_9
   { PORTA, PIO_PA29, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT1_10
 // EXT3
   { PORTA, PIO_PA30, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT3_5
   { PORTB, PIO_PB15, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT3_6
-  { PORTA, PIO_PA1B_TIOB0, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT3_7
+  { PORTA, PIO_PA1B_TC0_TIOB0, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT3_7
   { PORTB, PIO_PB13, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT3_8
   { PORTB, PIO_PB3, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT3_9
   { PORTA, PIO_PA15, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // EXT3_10
@@ -113,10 +114,10 @@ const PinDescription g_aPinMap[]=
  * | 25         |                  |  PA20  | A3              | TCLK2   I2SWS1  AD3
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
 */
-  { PORTA, PIO_PA17X1_AD0, GPIO_NOMUX, ADC_CHL0, NOT_ON_PWM, NOT_ON_TIMER }, // AD0
-  { PORTA, PIO_PA18X1_AD1, GPIO_NOMUX, ADC_CHL1, NOT_ON_PWM, NOT_ON_TIMER }, // AD1
-  { PORTA, PIO_PA19X1_AD2, GPIO_NOMUX, ADC_CHL2, NOT_ON_PWM, NOT_ON_TIMER }, // AD2
-  { PORTA, PIO_PA20X1_AD3, GPIO_NOMUX, ADC_CHL3, NOT_ON_PWM, NOT_ON_TIMER }, // AD3
+  { PORTA, PIO_PA17X1_ADC_AD0, GPIO_NOMUX, ADC_CHL0, NOT_ON_PWM, NOT_ON_TIMER }, // AD0
+  { PORTA, PIO_PA18X1_ADC_AD1, GPIO_NOMUX, ADC_CHL1, NOT_ON_PWM, NOT_ON_TIMER }, // AD1
+  { PORTA, PIO_PA19X1_ADC_AD2, GPIO_NOMUX, ADC_CHL2, NOT_ON_PWM, NOT_ON_TIMER }, // AD2
+  { PORTA, PIO_PA20X1_ADC_AD3, GPIO_NOMUX, ADC_CHL3, NOT_ON_PWM, NOT_ON_TIMER }, // AD3
 
 /* +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  * |            | Wire             |        |                 | !! Warning, schematics seem to be false !!
@@ -128,11 +129,11 @@ const PinDescription g_aPinMap[]=
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  */
 // Wire
-  { PORTB, PIO_PB10B_TWD6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD6
-  { PORTB, PIO_PB11B_TWCK6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK6
+  { PORTB, PIO_PB10B_TWI6_TWD6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD6
+  { PORTB, PIO_PB11B_TWI6_TWCK6, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK6
 // Wire 1
-  { PORTB, PIO_PB8A_TWD4, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD4
-  { PORTB, PIO_PB9A_TWCK4, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK4
+  { PORTB, PIO_PB8A_TWI4_TWD4, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD4
+  { PORTB, PIO_PB9A_TWI4_TWCK4, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK4
 
 /* +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  * |            | SPI              |        |                 |
