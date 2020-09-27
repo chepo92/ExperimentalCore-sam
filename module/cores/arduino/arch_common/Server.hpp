@@ -20,7 +20,7 @@
 #ifndef _ARDUINO_CORE_NETWORK_SERVER_HPP_
 #define _ARDUINO_CORE_NETWORK_SERVER_HPP_
 
-#include "CorePrint.hpp"
+#include "Print.h"
 
 class Server : public Print {
 public:

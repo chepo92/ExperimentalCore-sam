@@ -17,7 +17,7 @@
 */
 
 //#include "Arduino.h"
-#include "CorePrint.hpp"
+#include "Print.h"
 #include "CorePrintable.hpp"
 #include <math.h> // for isnan and isinf
 

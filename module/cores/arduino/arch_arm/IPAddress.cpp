@@ -19,7 +19,7 @@
 //#include "Arduino.h"
 #include "IPAddress.hpp"
 #include <string.h>
-#include "CorePrint.hpp"
+#include "Print.h"
 #include "CorePrintable.hpp"
 
 IPAddress::IPAddress()
