@@ -136,6 +136,25 @@ typedef enum _PortNumber
   NUM_PORTS // Number of declared I/O controllers
 } PortNumber ;
 
+
+#if (SAM4S_SERIES || SAM4E_SERIES)
+	#define NUM_FLEXCOM			2
+#elif SAM3XA_SERIES
+	#define NUM_FLEXCOM			3
+#elif SAME70_SERIES
+	#define NUM_FLEXCOM			5
+#elif __SAMG55J19__
+	// only in SAMG55J19
+	#define NUM_FLEXCOM			8
+#elif SAMG55_SERIES
+	#define NUM_FLEXCOM			7
+#else
+	#define NUM_FLEXCOM			0
+#endif
+
+extern const uint8_t FlexcomIds[NUM_FLEXCOM];
+
+
 typedef struct _Port
 {
   Pio* pGPIO;

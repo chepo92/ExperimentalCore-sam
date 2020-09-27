@@ -40,20 +40,20 @@ const PinDescription g_aPinMap[]=
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  * |            | Serial           |        |                 |
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
- * | 0          | N/A              |  PA27  | ICE USB Serial  | RXD7
- * | 1          | N/A              |  PA28  | ICE USB Serial  | TXD7
- * | 2          | EXT1_13          |  PA9   | USART RX        | RXD0
- * | 3          | EXT1_14          |  PA10  | USART TX        | TXD0
+ * | 0          | N/A              |  PA4   | USART RX        | RXD3
+ * | 1          | N/A              |  PA3   | USART TX        | TXD3
+ * | 2          | EXT1_13          |  PB9   | USART RX        | RXD4
+ * | 3          | EXT1_14          |  PB8   | USART TX        | TXD4
  * | 4          | EXT3_13          |  PB1   | USART RX        | RXD6
  * | 5          | EXT3_14          |  PB0   | USART TX        | TXD6
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
 */
 // Serial
-  { PORTA, PIN_PA27, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 7 RXD7
-  { PORTA, PIN_PA28, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 7 TXD7
+  { PORTA, PIN_PA4, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 3 RXD3
+  { PORTA, PIN_PA3, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 3 TXD3
 // Serial 1
-  { PORTA, PIN_PA9, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 0 RXD0
-  { PORTA, PIN_PA10, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 0 TXD0
+  { PORTB, PIN_PB9, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 4 RXD0
+  { PORTB, PIN_PB8, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 4 TXD0
 // Serial 2
   { PORTB, PIN_PB1, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 6 RXD6
   { PORTB, PIN_PB0, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Flexcom 6 TXD6
@@ -122,34 +122,34 @@ const PinDescription g_aPinMap[]=
 /* +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  * |            | Wire             |        |                 | !! Warning, schematics seem to be false !!
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
- * | 26         | EXT1_11          |  PB10  |                 | TWD6
- * | 27         | EXT1_12          |  PB11  |                 | TWCK6
- * | 28         | EXT3_11          |  PB8   |                 | TWD4
- * | 29         | EXT3_12          |  PB9   |                 | TWCK4
+ * | 26         | EXT1_11          |  PA6   |                 | TWD2
+ * | 27         | EXT1_12          |  PA5   |                 | TWCK2
+ * | 28         | EXT3_11          |  PB3   |                 | TWD1
+ * | 29         | EXT3_12          |  PB2   |                 | TWCK1
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  */
 // Wire
-  { PORTB, PIO_PB10, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD6
-  { PORTB, PIO_PB11, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK6
+  { PORTB, PIN_PA6, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD2
+  { PORTB, PIN_PA5, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK2
 // Wire 1
-  { PORTB, PIO_PB8, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD4
-  { PORTB, PIO_PB9, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK4
+  { PORTB, PIO_PB3, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWD1
+  { PORTB, PIO_PB2, GPIO_PERIPH_A, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // TWCK1
 
 /* +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  * |            | SPI              |        |                 |
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
- * | 30         | EXT1_16          |  PA13  | SPI_MOSI        |
- * | 31         | EXT1_17          |  PA12  | SPI_MISO        |
- * | 32         | EXT1_18          |  PA14  | SPI_SCK         |
- * | 33         | EXT1_15          |  PA11  | SPI_SS_A        |
- * | 34         | EXT3_15          |  PA5   | SPI_SS_A        |
+ * | 30         | EXT1_16          |  PA28  | SPI_MOSI        |
+ * | 31         | EXT1_17          |  PA27  | SPI_MISO        |
+ * | 32         | EXT1_18          |  PA29  | SPI_SCK         |
+ * | 33         | EXT1_15          |  PA30  | SPI_SS_A        |
+ * | 34         | EXT3_15          |  PA31  | SPI_SS_B        |
  * +------------+------------------+--------+-----------------+--------------------------------------------------------------------------------------------------------
  */
-  { NOT_A_PORT, 0, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Fake definition
-  { NOT_A_PORT, 0, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Fake definition
-  { NOT_A_PORT, 0, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Fake definition
-  { NOT_A_PORT, 0, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Fake definition
-  { NOT_A_PORT, 0, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // Fake definition
+  { PORTA, PIN_PA28, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // SPI7_MOSI
+  { PORTA, PIN_PA27, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // SPI7_MISO
+  { PORTA, PIN_PA29, GPIO_PERIPH_B, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, // SPI7_SPCK
+  { PORTA, PIN_PA30, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, //
+  { PORTA, PIN_PA31, GPIO_NOMUX, NOT_ON_ANALOG, NOT_ON_PWM, NOT_ON_TIMER }, //
 } ;
 
 #ifdef __cplusplus
@@ -165,7 +165,7 @@ static void Serial_Handler(void)
   Serial.IrqHandler();
 }
 
-SAMSerial Serial( (Usart*)USART7, PIN_SERIAL_RX, PIN_SERIAL_TX, Serial_Handler, 0);
+SAMSerial Serial( (Usart*) USART3, PIN_SERIAL_RX, PIN_SERIAL_TX, Serial_Handler, 0);
 
 // Serial1 Interrupt handler
 static void Serial1_Handler(void)
@@ -173,7 +173,7 @@ static void Serial1_Handler(void)
   Serial1.IrqHandler();
 }
 
-SAMSerial Serial1( (Usart*)USART0, PIN_SERIAL1_RX, PIN_SERIAL1_TX, Serial1_Handler, 0);
+SAMSerial Serial1( (Usart*) USART4, PIN_SERIAL1_RX, PIN_SERIAL1_TX, Serial1_Handler, 0);
 
 // Serial2 Interrupt handler
 static void Serial2_Handler(void)
@@ -181,7 +181,7 @@ static void Serial2_Handler(void)
   Serial2.IrqHandler();
 }
 
-SAMSerial Serial2( (Usart*)USART6, PIN_SERIAL2_RX, PIN_SERIAL2_TX, Serial2_Handler, 0);
+SAMSerial Serial2( (Usart*) USART6, PIN_SERIAL2_RX, PIN_SERIAL2_TX, Serial2_Handler, 0);
 
 /*
  * Serial Event handler
