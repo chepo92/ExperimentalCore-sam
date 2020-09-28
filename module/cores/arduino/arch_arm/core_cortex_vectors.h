@@ -66,18 +66,16 @@ extern void* vectorSetOrigin(DeviceVectors* pBase);
  * \param number Vector index.
  * \param isr    Function pointer.
  *
- * \return Previous vector handler.
  */
-extern void* vectorAssign(IRQn_Type number, void (*isr)(void));
+extern void vectorAssign(IRQn_Type number, void (*isr)(void));
 
 /*
  * \brief Reset handler of the given vector to default.
  *
  * \param number Vector index.
  *
- * \return Previous vector handler.
  */
-extern void* vectorReset(IRQn_Type number);
+extern void vectorReset(IRQn_Type number);
 
 #ifdef __cplusplus
 }
