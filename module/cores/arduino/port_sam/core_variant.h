@@ -173,7 +173,7 @@ typedef enum _EExt_Interrupts
 
 typedef enum _EGPIOType
 {
-  GPIO_NOMUX,
+  GPIO_NOMUX = -1,
   GPIO_PERIPH_A,
   GPIO_PERIPH_B,
 #if (SAM4S_SERIES || SAM4E_SERIES)

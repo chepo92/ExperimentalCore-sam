@@ -29,8 +29,8 @@
 
 // Some libraries and sketches depend on this
 // AVR stuff, assuming Arduino.h automatically includes it...
-#include "avr_compat/core_pgmspace.h"
-#include "avr_compat/core_interrupt.h"
+#include "core_pgmspace.h"
+#include "core_interrupt.h"
 
 #include "core_binary.h"
 //#include "core_itoa.h"
