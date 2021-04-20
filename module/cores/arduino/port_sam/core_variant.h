@@ -20,13 +20,14 @@
 #ifndef _ARDUINO_CORE_VARIANT_H_
 #define _ARDUINO_CORE_VARIANT_H_
 
-#include <stdint.h>
-#include "sam.h"
-#include "core_constants.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+#include <stdint.h>
+#include "sam.h"
+#include "core_sam.h"
+#include "core_constants.h"
 
 /* The 2 following symbols must be present into variant_startup.c */
 extern uint32_t SystemCoreClock;
@@ -135,6 +136,25 @@ typedef enum _PortNumber
   NUM_PORTS // Number of declared I/O controllers
 } PortNumber ;
 
+
+#if (SAM4S_SERIES || SAM4E_SERIES)
+	#define NUM_FLEXCOM			2
+#elif SAM3XA_SERIES
+	#define NUM_FLEXCOM			3
+#elif SAME70_SERIES
+	#define NUM_FLEXCOM			5
+#elif __SAMG55J19__
+	// only in SAMG55J19
+	#define NUM_FLEXCOM			8
+#elif SAMG55_SERIES
+	#define NUM_FLEXCOM			7
+#else
+	#define NUM_FLEXCOM			0
+#endif
+
+extern const uint8_t FlexcomIds[NUM_FLEXCOM];
+
+
 typedef struct _Port
 {
   Pio* pGPIO;
@@ -153,7 +173,7 @@ typedef enum _EExt_Interrupts
 
 typedef enum _EGPIOType
 {
-  GPIO_NOMUX,
+  GPIO_NOMUX = -1,
   GPIO_PERIPH_A,
   GPIO_PERIPH_B,
 #if (SAM4S_SERIES || SAM4E_SERIES)

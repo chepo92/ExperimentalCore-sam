@@ -325,9 +325,9 @@ static void SPI_0_Init(void)
       g_aPinMap[PIN_SPI_SCK].ulPinType,
       g_aPinMap[PIN_SPI_SCK].ulPin,
       g_aPinMap[PIN_SPI_SCK].ulPinConfiguration);
+#endif // 0
 }
 
-SPIClass SPI(SPI_INTERFACE, SPI_INTERFACE_ID, BOARD_SPI_DEFAULT_SS, SPI_0_Init);
-#endif // 0
+SPIClass SPI(SPI_INTERFACE, SPI_INTERFACE_ID, SS, SPI_0_Init);
 #endif // SPI_INTERFACES_COUNT
 

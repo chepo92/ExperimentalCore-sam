@@ -90,29 +90,23 @@ extern "C"
 /*
  * Analog pins
  */
-#if 0 // TODO Analog pins
-#define PIN_A0               (14ul)
-#define PIN_A1               (15ul)
-#define PIN_A2               (16ul)
-#define PIN_A3               (17ul)
-#define PIN_A4               (18ul)
-#define PIN_A5               (19ul)
+#define PIN_A0               (22ul)
+#define PIN_A1               (23ul)
+#define PIN_A2               (24ul)
+#define PIN_A3               (25ul)
 
 static const uint8_t A0  = PIN_A0 ;
 static const uint8_t A1  = PIN_A1 ;
 static const uint8_t A2  = PIN_A2 ;
 static const uint8_t A3  = PIN_A3 ;
-static const uint8_t A4  = PIN_A4 ;
-static const uint8_t A5  = PIN_A5 ;
-#define ADC_RESOLUTION		12
-#endif // TODO Analog pins
+#define ADC_RESOLUTION		 12
 
 /*
  * Serial interfaces
  */
 // Serial (EDBG)
-#define PIN_SERIAL_RX       (0ul)
-#define PIN_SERIAL_TX       (1ul)
+#define PIN_SERIAL_RX        (0ul)
+#define PIN_SERIAL_TX        (1ul)
 
 // Serial1
 #define PIN_SERIAL1_RX       (2ul)
@@ -122,27 +116,26 @@ static const uint8_t A5  = PIN_A5 ;
 #define PIN_SERIAL2_RX       (4ul)
 #define PIN_SERIAL2_TX       (5ul)
 
-#if 0 // TODO SPI
 /*
  * SPI Interfaces
+ * TODO: Add more SPI interfaces
  */
 #define SPI_INTERFACES_COUNT 1
 
-#define SPI_INTERFACE        SPI
-#define SPI_INTERFACE_ID     ID_SPI
+#define SPI_INTERFACE        SPI7
+#define SPI_INTERFACE_ID     ID_FLEXCOM7
 #define SPI_CHANNELS_NUM     2
 
-#define PIN_SPI_MISO         (ul)
-#define PIN_SPI_MOSI         (ul)
-#define PIN_SPI_SCK          (ul)
-#define PIN_SPI_SS0          (ul)
-#define PIN_SPI_SS1          (ul)
+#define PIN_SPI_MOSI         (30ul)
+#define PIN_SPI_MISO         (31ul)
+#define PIN_SPI_SCK          (32ul)
+#define PIN_SPI_SS0          (33ul)
+#define PIN_SPI_SS1          (34ul)
 
 static const uint8_t SS	  = PIN_SPI_SS0;
 static const uint8_t MOSI = PIN_SPI_MOSI;
 static const uint8_t MISO = PIN_SPI_MISO;
 static const uint8_t SCK  = PIN_SPI_SCK;
-#endif // TODO SPI
 
 /*
  * Wire Interfaces
@@ -153,19 +146,19 @@ static const uint8_t SCK  = PIN_SPI_SCK;
 #define PIN_WIRE_SCL         (27ul)
 //#define PIN_WIRE_SDA_PERIPH  (GPIO_PERIPH_B)
 //#define PIN_WIRE_SCL_PERIPH  (GPIO_PERIPH_B)
-#define WIRE_INTERFACE       TWI6
-//#define WIRE_INTERFACE_ID    ID_FLEXCOM6
-//#define WIRE_ISR_HANDLER     FLEXCOM6_Handler
-//#define WIRE_ISR_ID          FLEXCOM6_IRQn
+#define WIRE_INTERFACE       TWI2
+#define WIRE_INTERFACE_ID    ID_FLEXCOM2
+//#define WIRE_ISR_HANDLER     FLEXCOM2_Handler
+//#define WIRE_ISR_ID          FLEXCOM2_IRQn
 
 #define PIN_WIRE1_SDA        (28ul)
 #define PIN_WIRE1_SCL        (29ul)
 //#define PIN_WIRE1_SDA_PERIPH (GPIO_PERIPH_A)
 //#define PIN_WIRE1_SCL_PERIPH (GPIO_PERIPH_A)
-#define WIRE1_INTERFACE      TWI4
-//#define WIRE1_INTERFACE_ID   ID_FLEXCOM4
-//#define WIRE1_ISR_HANDLER    FLEXCOM4_Handler
-//#define WIRE1_ISR_ID         FLEXCOM4_IRQn
+#define WIRE1_INTERFACE      TWI1
+//#define WIRE1_INTERFACE_ID   ID_FLEXCOM1
+//#define WIRE1_ISR_HANDLER    FLEXCOM1_Handler
+//#define WIRE1_ISR_ID         FLEXCOM1_IRQn
 
 #if 0 // TODO USB
 /*

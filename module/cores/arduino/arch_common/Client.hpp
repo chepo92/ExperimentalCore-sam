@@ -20,7 +20,7 @@
 #ifndef _ARDUINO_CORE_NETWORK_CLIENT_HPP_
 #define _ARDUINO_CORE_NETWORK_CLIENT_HPP_
 
-#include "CorePrint.hpp"
+#include "Print.h"
 #include "CoreStream.hpp"
 #include "IPAddress.hpp"
 

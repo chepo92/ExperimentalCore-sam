@@ -23,7 +23,7 @@
 #define _ARDUINO_CORE_STREAM_HPP_
 
 #include <inttypes.h>
-#include "CorePrint.hpp"
+#include "Print.h"
 
 // compatability macros for testing
 /*

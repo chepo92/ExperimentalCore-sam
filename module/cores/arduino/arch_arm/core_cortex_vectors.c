@@ -52,45 +52,43 @@ void vector_halt(void)
  */
 void Reset_Handler( void )
 {
-  uint32_t *pSrc, *pDest;
+    uint32_t *pSrc, *pDest;
 
-  /* Initialize the initialized data section */
-  pSrc = &__etext;
-  pDest = &__data_start__;
+    /* Initialize the initialized data section */
+    pSrc = &__etext;
+    pDest = &__data_start__;
 
-  if ( (&__data_start__ != &__data_end__) && (pSrc != pDest) )
-  {
-    for (; pDest < &__data_end__ ; pDest++, pSrc++ )
+    if ( (&__data_start__ != &__data_end__) && (pSrc != pDest) )
     {
-      *pDest = *pSrc ;
+        for (; pDest < &__data_end__ ; pDest++, pSrc++ )
+        {
+            *pDest = *pSrc ;
+        }
     }
-  }
 
-  /* Clear the zero section */
-  if ( &__bss_start__ != &__bss_end__ )
-  {
-    for ( pDest = &__bss_start__ ; pDest < &__bss_end__ ; pDest++ )
+    /* Clear the zero section */
+    if ( &__bss_start__ != &__bss_end__ )
     {
-      *pDest = 0ul ;
+        for ( pDest = &__bss_start__ ; pDest < &__bss_end__ ; pDest++ )
+        {
+            *pDest = 0ul ;
+        }
     }
-  }
 
-  /* exception_table being initialized, setup vectors in RAM */
-  vectorSetOrigin( &exception_table );
+    /* exception_table being initialized, setup vectors in RAM */
+    vectorSetOrigin(&exception_table);
 
-  /* Initialize the system */
-  SystemInit() ;
+    /* Initialize the system */
+    SystemInit() ;
 
-  /* calls _init() functions, C++ constructors included */
-  __libc_init_array();
+    /* calls _init() functions, C++ constructors included */
+    __libc_init_array();
 
-  /* Branch to main function */
-  main() ;
+    /* Branch to main function */
+    main() ;
 
-  /* Infinite loop */
-  while ( 1 )
-  {
-  }
+    /* Infinite loop */
+    while (1);
 }
 
 #if defined DEBUG && (DEBUG == 1)
@@ -189,41 +187,47 @@ const CoreVectors startup_exception_table=
 
 void* vectorSetOrigin(DeviceVectors* pBase)
 {
-  void* p=(void*)(SCB->VTOR);
+    void* p=(void*)(SCB->VTOR);
 
-  /* relocate vector table */
-  __disable_irq();
-  SCB->VTOR = ((uint32_t)pBase)&SCB_VTOR_TBLOFF_Msk;
-  __DSB();
-  __enable_irq();
+    /* relocate vector table */
+    __disable_irq();
+    SCB->VTOR = ((uint32_t)pBase)&SCB_VTOR_TBLOFF_Msk;
+    __DSB();
+    __enable_irq();
 
-  return p;
+    return p;
 }
 
-void* vectorAssign(IRQn_Type number, void (*isr)(void))
-{
-  uint32_t* pulTable=(uint32_t*)(SCB->VTOR);
-  void *p=(void*)(pulTable+number+16);
+#define VECTORTABLE_SIZE        (240)
+#define VECTORTABLE_ALIGNMENT   (0x100U)    // next power of 2 = 256
 
-  __disable_irq();
-  pulTable[number+16]=(uint32_t)isr ;
-  __DSB();
-  __enable_irq();
+// new vector table in RAM, same size as vector table in ROM
+static uint32_t vectors_ram[VECTORTABLE_SIZE] __ALIGNED(VECTORTABLE_ALIGNMENT);
 
-  return p;
+void vectorAssign(IRQn_Type IRQn, void (*isr)(void))
+{    
+    // Reference:    
+    // https://www.keil.com/pack/doc/CMSIS/Core/html/using_VTOR_pg.html
+    uint32_t i;
+    uint32_t *vectors = &exception_table;
+
+    for (i = 0; i < VECTORTABLE_SIZE; i++) {
+        vectors_ram[i] = vectors[i];       /* copy vector table to RAM */
+    }
+    /* replace SysTick Handler */
+    vectors_ram[IRQn + NVIC_USER_IRQ_OFFSET] = (uint32_t)isr;
+  
+    /* relocate vector table */
+    __disable_irq();
+    SCB->VTOR = (uint32_t)&vectors_ram;
+    __DSB();
+    __enable_irq();
+
 }
 
-void* vectorReset(IRQn_Type number)
+void vectorReset(IRQn_Type IRQn)
 {
-  uint32_t* pulTable=(uint32_t*)(SCB->VTOR);
-  void *p=(void*)(pulTable+number+16);
-
-  __disable_irq();
-  pulTable[number+16]=(uint32_t)vector_halt ;
-  __DSB();
-  __enable_irq();
-
-  return p;
+    vectorAssign(IRQn, HardFault_Handler);
 }
 
 #ifdef __cplusplus

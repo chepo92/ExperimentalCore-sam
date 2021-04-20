@@ -56,8 +56,9 @@ class SAMSerial : public HardwareSerial
 
     RingBuffer _rx_buffer;
     RingBuffer _tx_buffer;
-
-    Usart* _pUsart;
+	
+	Flexcom* _flexcom;
+    Usart* _usart;
     uint32_t _ulPinRX;
     EGPIOType _ulPinRXMux;
     uint32_t _ulPinTX;
