@@ -5,6 +5,8 @@ Experimental new core for Arduino Due and other (AT91)SAM based boards.
 
 Please, check https://github.com/aethaniel/ExperimentalCore-sam/wiki for more information.
 
+How to set compiler path
+https://stackoverflow.com/questions/50076721/set-gcc-path-in-makefile
 
 
 # Where to download
